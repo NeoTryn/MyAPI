@@ -14,10 +14,10 @@ router.post('/', function (req, res) {
         name : req.body.name,
         email : req.body.email,
         password : req.body.password
-    },
-    function (err, user) {
-        if (err) return res.status(500).send("Problem adding to database");
+    }).then((user) => {
         res.status(200).send(user);
+    }).catch((error) => {
+        return res.status(500).send("that aint work" + error);
     });
 })
 
