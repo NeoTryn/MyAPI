@@ -38,13 +38,20 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.delete('/:id', function (req, res) {
-    User.findByIdAndDelete(req.params.id)
+router.delete('/:name', function (req, res) {
+    /*User.findByIdAndDelete(req.params.id)
     .then((user) => {
         res.status(200).send("User " + user.name + " was deleted.");
     })
     .catch((error) => {
         return res.status(500).send("Problem deleting user");
+    });*/
+    User.findOneAndDelete({ name : req.params.name})
+    .then((user) => {
+        res.status(200).send("User " + user.name + " was deleted.");
+    })
+    .catch((error) => {
+        return res.status(500).send("Problem deleting user: " + error);
     });
 });
 
