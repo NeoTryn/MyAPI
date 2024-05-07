@@ -1,12 +1,15 @@
-var express = require('express');
-var db = require('./db');
-var cors = require('cors');
+let express = require('express');
+let db = require('./db');
+let cors = require('cors');
 
-var app = express();
+let app = express();
 
 app.use(cors());
 
-var UserController = require('./User/UserController');
+let UserController = require('./User/UserController');
 app.use('/users', UserController);
+
+let CharacterController = require('./Character/characterController');
+app.use('/characters', CharacterController);
 
 module.exports = app;
