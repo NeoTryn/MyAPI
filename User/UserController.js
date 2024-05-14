@@ -29,6 +29,14 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/name/:name', function(req, res) {
+    User.findOne({name : req.params.name}).then((users) => {
+        res.status(200).send(users);
+    }).catch((error) => {
+        return res.status(500).send("Problem getting users: " + error);
+    });
+});
+
 router.get('/id/:id', function (req, res) {
     User.findById(req.params.id).then((user) => {
         if (!user) return res.status(404).send("User not found");
