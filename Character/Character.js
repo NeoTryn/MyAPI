@@ -4,7 +4,8 @@ let characterSchema = new mongoose.Schema({
         height : Number, 
         alive : Boolean, 
         strength : String, 
-        weakness : String});
+        weakness : String,
+        url : String});
 
 mongoose.model("Character", characterSchema);
 module.exports = mongoose.model("Character");
