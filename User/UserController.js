@@ -13,7 +13,8 @@ router.post('/', function (req, res) {
     User.create({
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        pictureLink : req.body.pictureLink
     }).then((user) => {
         res.status(200).send(user);
     }).catch((error) => {
@@ -77,5 +78,16 @@ router.put('/id/:id', function(req, res) {
         return res.status(500).send("Problem updating user " + error);
     });
 });
+
+router.put('/name/:name', function(req, res) {
+    User.findOneAndUpdate({name : req.params.name}, req.body, { new : true })
+    .then((user) => {
+        if (!user) return res.status(404).send("User not found");
+        res.status(200).send(user);
+    })
+    .catch((error) => {
+        return res.status(500).send("Problem updating user " + error);
+    });
+})
 
 module.exports = router;
